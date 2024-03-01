@@ -7,6 +7,7 @@ ZENDESK_EMAIL = config('ZENDESK_EMAIL', '')
 ZENDESK_PASSWORD = config('ZENDESK_PASSWORD', '')
 ZENDESK_DOMAIN = config('ZENDESK_DOMAIN', '')
 ZENDESK_BASICAUTH = config('ZENDESK_BASICAUTH', '')
+ZENDESK_URL = config('ZENDESK_URL', '')
 
 def get_zempy_conexao():
     creds = {
@@ -31,7 +32,7 @@ def main():
     tickets_agent_conditions = None
     tickets_ticket_fields = None
 
-    url = f"https://grupocard.zendesk.com/api/v2/tickets/{ticketid}.json?include=users,brands"
+    url = f"{ZENDESK_URL}/api/v2/tickets/{ticketid}.json?include=users,brands"
     payload = {}
     headers = {
         'Authorization': ZENDESK_BASICAUTH,
@@ -41,7 +42,7 @@ def main():
     tickets_custom_fields = response.json()["ticket"]["custom_fields"]
     ticket_form_id = response.json()["ticket"]["ticket_form_id"]
 
-    url = f"https://grupocard.zendesk.com/api/v2/ticket_forms/{ticket_form_id}.json?include=ticket_fields"
+    url = f"{ZENDESK_URL}/api/v2/ticket_forms/{ticket_form_id}.json?include=ticket_fields"
     payload = {}
     headers = {
         'Authorization': ZENDESK_BASICAUTH,
@@ -120,7 +121,7 @@ def main():
 
     # lista de formularios
     print("\n- lista de formularios")
-    url = "https://grupocard.zendesk.com/api/v2/ticket_forms"
+    url = f"{ZENDESK_URL}/api/v2/ticket_forms"
     payload = {}
     headers = {
         'Authorization': ZENDESK_BASICAUTH,
