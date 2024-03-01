@@ -9,7 +9,7 @@ ZENDESK_DOMAIN = config('ZENDESK_DOMAIN', '')
 ZENDESK_BASICAUTH = config('ZENDESK_BASICAUTH', '')
 ZENDESK_URL = config('ZENDESK_URL', '')
 
-def get_zempy_conexao():
+def get_zenpy_connection():
     creds = {
         'email': ZENDESK_EMAIL,
         'token': ZENDESK_PASSWORD,
@@ -22,7 +22,7 @@ def get_zempy_conexao():
 
 def main():
     ticketid = 2425717#2420520#1134721
-    zenpy_client = get_zempy_conexao()
+    zenpy_client = get_zenpy_connection()
 
     # ticket = zenpy_client.tickets(id=ticketid)
     # print(ticket.custom_fields)
