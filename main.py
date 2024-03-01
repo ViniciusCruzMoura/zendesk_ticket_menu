@@ -88,7 +88,7 @@ def main():
                 continue
             
             
-            # url = f"https://grupocard.zendesk.com/api/v2/ticket_fields/{agent_conditions['parent_field_id']}/options"
+            # url = f"{ZENDESK_URL}/api/v2/ticket_fields/{agent_conditions['parent_field_id']}/options"
             # payload = {}
             # headers = {
             #     'Authorization': ZENDESK_BASICAUTH,
@@ -136,7 +136,7 @@ def main():
 
 
     # fields = []
-    # url = "https://grupocard.zendesk.com/api/v2/ticket_fields"
+    # url = f"{ZENDESK_URL}/api/v2/ticket_fields"
     # payload = {}
     # headers = {
     #     'Authorization': ZENDESK_BASICAUTH,
@@ -161,7 +161,8 @@ def main():
     # print("fields ", fields, len(fields))
 
 
-    print("asdasdsdsd--------------------------")
+    print("--------------------------")
+    print("--------------------------")
     fields_conditions = []
     for ticket_field_ids in tickets_ticket_field_ids:
         for agent_conditions in tickets_agent_conditions:
@@ -180,7 +181,14 @@ def main():
                 #     continue
                 fields_conditions.append(child_fields['id'])
     print("campos: ", fields_conditions, len(fields_conditions))
-
+    for fields in fields_conditions:
+        url = f"{ZENDESK_URL}/api/v2/ticket_fields/{fields}"
+        payload = {}
+        headers = {
+            'Authorization': ZENDESK_BASICAUTH,
+        }
+        response = requests.request("GET", url, headers=headers, data=payload)
+        print(fields, response.json()["ticket_field"]["title"])
 
 if __name__ == '__main__':
     main()
