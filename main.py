@@ -190,6 +190,29 @@ def main():
         response = requests.request("GET", url, headers=headers, data=payload)
         print(fields, response.json()["ticket_field"]["title"])
 
+    # 'lista_de_status': [
+    #         {
+    #             "item": 1500010139582,
+    #             "label": "Aberto"
+    #         },
+    #         {
+    #             "item": 1500010139602,
+    #             "label": "Pendente"
+    #         },
+    #         {
+    #             "item": 1500010139622,
+    #             "label": "Em espera"
+    #         },
+    #         {
+    #             "item": 1500010139642,
+    #             "label": "Resolivido"
+    #         },
+    #         # {
+    #         #     "item": 7537187200663,
+    #         #     "label": "Fechado"
+    #         # },
+    #     ],
+
 if __name__ == '__main__':
     main()
     sys.exit(0)
