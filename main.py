@@ -191,27 +191,27 @@ def main():
         print(fields, response.json()["ticket_field"]["title"])
 
     # 'lista_de_status': [
-    #         {
-    #             "item": 1500010139582,
-    #             "label": "Aberto"
-    #         },
-    #         {
-    #             "item": 1500010139602,
-    #             "label": "Pendente"
-    #         },
-    #         {
-    #             "item": 1500010139622,
-    #             "label": "Em espera"
-    #         },
-    #         {
-    #             "item": 1500010139642,
-    #             "label": "Resolivido"
-    #         },
-    #         # {
-    #         #     "item": 7537187200663,
-    #         #     "label": "Fechado"
-    #         # },
-    #     ],
+    #     {
+    #         #"item": 1500010139582,
+    #         "item": 'open',
+    #         "label": "Aberto"
+    #     },
+    #     {
+    #         #"item": 1500010139602,
+    #         "item": 'pending',
+    #         "label": "Pendente"
+    #     },
+    #     {
+    #         #"item": 1500010139622,
+    #         "item": 'hold',
+    #         "label": "Em espera"
+    #     },
+    #     {
+    #         #"item": 1500010139642,
+    #         "item": 'solved',
+    #         "label": "Resolvido"
+    #     },
+    # ],
 
 if __name__ == '__main__':
     main()
