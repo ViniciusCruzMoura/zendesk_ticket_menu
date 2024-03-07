@@ -12,7 +12,7 @@ ZENDESK_URL = config('ZENDESK_URL', '')
 
 #oracle
 USR= config('USR', '')
-PWD = config('PWD', '')
+PASSWD = config('PASSWD', '')
 HOST = config('HOST', '')
 
 #receita, sefaz
@@ -30,15 +30,48 @@ def get_zenpy_connection():
 
     return zenpy_client
 
+def ORACLE_exec_sql(sql, type=""):
+    words = ["DROP", "DELETE", "ALTER"]
+    for word in words:
+        if word in sql:
+            raise Exception("dangerous sql detected")
+    
+    if "SELECT" in sql:
+        type="qry"
+
+    import cx_Oracle
+    result = ''
+    conn = cx_Oracle.connect(
+        user=f'{USR}',
+        password=f'{PASSWD}',
+        dsn=f'{HOST}',
+    )
+    try:
+        cur = conn.cursor()
+        cur.execute(sql)
+        if type == 'qry':
+            result = [
+                dict(zip([col[0] for col in cur.description], row))
+                for row in cur.fetchall()
+            ]
+    except cx_Oracle.DatabaseError as err:
+        import traceback
+        print(err)
+        traceback.print_exc()
+        result = err
+    finally:
+        if conn is not None:
+            conn.close()
+    return result
+
 def roda_sql_oracle_utls(vsql, tipo):
     import cx_Oracle
     resultado = ''
     conn = cx_Oracle.connect(
         user=f'{USR}',
-        password=f'{PWD}',
+        password=f'{PASSWD}',
         dsn=f'{HOST}',
     )
-
     try:
         # Executando a consulta
         cur = conn.cursor()
@@ -51,7 +84,6 @@ def roda_sql_oracle_utls(vsql, tipo):
     finally:
         if conn is not None:
             conn.close()
-
     return resultado
 
 def ext_sigla():
