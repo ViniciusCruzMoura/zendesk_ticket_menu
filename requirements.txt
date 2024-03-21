@@ -2,3 +2,4 @@ requests
 python-decouple
 zenpy
 cx_Oracle
+psycopg2-binary
